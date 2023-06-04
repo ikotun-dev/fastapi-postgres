@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Biker(BaseModel):
     id: Optional[int]
@@ -11,7 +11,8 @@ class Biker(BaseModel):
     phone_number: Optional[int] 
     email: Optional[str]
     profile_image:  Optional[str] 
-    created_at: Optional[datetime] =  Field(default_factory=datetime.now)
+    # created_at: Optional[datetime] =  Field(default_factory=utc.now)
+    created_at: Optional[datetime] = Field(default_factory=lambda: datetime.now(timezone.utc))
     club: Optional[bool] = False
     badge: Optional[bool] = False
     location: Optional[str] = None
