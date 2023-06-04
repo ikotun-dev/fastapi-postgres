@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Union
 from datetime import datetime, timezone
-
+from enum import Enum
 class Biker(BaseModel):
     id: Optional[int]
     username: str = Field(..., max_length=255, unique=True)
@@ -24,7 +24,18 @@ class Biker(BaseModel):
     confirmation_code: Optional[int] = None
     verification_status: Optional[bool] = False
 
+class PostType(Enum):
+    video  = "video"
+    image = "image"
 
-
+class Post(BaseModel):
+     id: Optional[int]
+#     # CONNECTION BETWEEN BIKER AND POST
+#     biker_id = models.ForeignKey(Biker, on_delete=models.CASCADE)
+     post_type: Optional[PostType]
+     biker_id : int 
+     video_url: str # url field
+     created_at: Optional[datetime] = Field(default_factory=lambda: datetime.now(timezone.utc))
+     location: str = Field(max_length=255)
 
  
