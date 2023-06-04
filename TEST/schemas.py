@@ -3,7 +3,7 @@ from typing import Optional, List
 from datetime import datetime
 
 class Biker(BaseModel):
-    id: int
+    id: Optional[int]
     username: str = Field(..., max_length=255, unique=True)
     # firstname: str = Field(None, max_length=255)
     # lastname: str = Field(None, max_length=255)
